@@ -44,4 +44,7 @@ typedef void(^CompleteBlock)(void);
 - (void)reloadDataWithCompleteBlock:(CompleteBlock)competeBlock;
 - (void)setCurrentPage:(NSInteger)currentPage animated:(BOOL)animated;
 
+- (void)cancelAutoSwitch;
+- (void)startAutoSwitchAfterNewLoop:(BOOL)newLoop;
+
 @end

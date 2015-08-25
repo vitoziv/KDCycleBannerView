@@ -51,7 +51,7 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-
+    
     NSArray *subViews = self.subviews;
     [subViews makeObjectsPerformSelector:@selector(removeFromSuperview)];
     
@@ -221,6 +221,20 @@ static void *kContentImageViewObservationContext = &kContentImageViewObservation
     [self setSwitchPage:-1 animated:YES withUserInterface:NO];
     
     [self performSelector:_cmd withObject:nil afterDelay:self.autoPlayTimeInterval];
+}
+
+- (void)cancelAutoSwitch
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(autoSwitchBannerView) object:nil];
+}
+
+- (void)startAutoSwitchAfterNewLoop:(BOOL)newLoop
+{
+    if (newLoop) {
+        [self performSelector:@selector(autoSwitchBannerView) withObject:nil afterDelay:self.autoPlayTimeInterval];
+    } else {
+        [self autoSwitchBannerView];
+    }
 }
 
 #pragma mark - KVO
